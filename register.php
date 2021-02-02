@@ -7,9 +7,9 @@ if (!empty($_POST)) {
     $errors= array();
     require_once 'bd.php';
 
-    if (empty($_POST['username']) || !preg_match('/^$[a-zA-Z0-9_]+$/',$_POST['username']))  {
+    if (empty($_POST['username'])) {
 
-        $errors['username'] =("votre pseudo n'est pas valide(alphanumérique)");
+        $errors['username'] ="veuillez entrer votre nom d'utlilisateur";
     
     } else {
         $req = $bd->prepare('SELECT id FROM users WHERE username = ?');
@@ -38,16 +38,16 @@ if (!empty($_POST)) {
 }
  
 
-    if (empty($_POST['password'])   ||  $_POST['password'] != $_POST['password_confirm']) {
+    if (empty($_POST['password']) ||  $_POST['password'] != $_POST['password_confirm']) {
 
-  $errors['password'] = "vous devez entrer un mot de passe valide";
+  $errors['password'] = "vous devez entrer un mot de passe identique";
     
     }
 
     if (empty($errors)){
 
       
-        $req = $bd-> prepare("INSERT INTO users SET username = ?, username= ?, email= ?");
+        $req = $bd-> prepare("INSERT INTO users SET username = ?, password = ?, email= ?");
         $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
         $req->execute([$_POST['username'], $password, $_POST['email']]);
 
@@ -82,7 +82,7 @@ if (!empty($_POST)) {
                 <label><b>Mot de passe</b></label>
                 <input type="password" placeholder="Entrer le mot de passe"  class="form-control" name="password" required>
                 <label><b>Confirmez votre mot de passe</b></label>
-                <input type="password" placeholder="password confirm" class="form-control"  name="password" required>
+                <input type="password" placeholder="password confirm" class="form-control"  name="password_confirm" required>
                 <input type="submit" id='submit' class="btn btn-primary" value="M'inscrire" >
 
 </form>

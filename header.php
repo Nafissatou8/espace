@@ -14,7 +14,7 @@
     <title>simplon's App</title>
   </head>
   <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse ">
       <div class="container bg-primary">
         <div class="navbar-header ">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
